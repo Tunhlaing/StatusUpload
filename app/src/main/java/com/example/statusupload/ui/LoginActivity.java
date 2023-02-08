@@ -59,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     startActivity(new Intent(this, HomeActivity.class));
                     finish();
+                } else if (!(myDatabase.isUserExist(etUserName.getText().toString()))) {
+                    Utils.showToast(this,"Please Register First");
                 } else {
                     Utils.showToast(this, "Username Or Password Incorrect");
                 }
