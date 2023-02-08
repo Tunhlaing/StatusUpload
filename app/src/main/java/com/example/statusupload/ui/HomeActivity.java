@@ -26,11 +26,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-        MyDatabase myDatabase;
-        TextInputEditText etStatus;
-        Button btUpload;
-        RecyclerView rvStatus;
-        boolean isFilter = false;
+    MyDatabase myDatabase;
+    TextInputEditText etStatus;
+    Button btUpload;
+    RecyclerView rvStatus;
+    boolean isFilter = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,47 +39,48 @@ public class HomeActivity extends AppCompatActivity {
         myDatabase = new MyDatabase(this);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Home");
-        Utils.showToast(this,"Welcome "+(SharePrefs.getStringPref(this,"userName")));
+        Utils.showToast(this, "Welcome " + (SharePrefs.getStringPref(this, "userName")));
         initView();
         handleClick();
-
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setAdapter(myDatabase.getAllStatus(0,SharePrefs.getIntPref(this,"userId")));
-            }
+        setAdapter(myDatabase.getAllStatus(0, SharePrefs.getIntPref(this, "userId")));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.logout_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
         showDialog("Are You Sure, You Want To Exit?", false);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_filter:{
-                if(!isFilter){
+        switch (item.getItemId()) {
+            case R.id.nav_filter: {
+                if (!isFilter) {
                     isFilter = true;
                     item.setIcon(R.drawable.baseline_filter_list_off_24);
-                    setAdapter(myDatabase.getAllStatus(1,SharePrefs.getIntPref(this,"userId")));
+                    setAdapter(myDatabase.getAllStatus(1, SharePrefs.getIntPref(this, "userId")));
 
-                }else {
+                } else {
                     isFilter = false;
                     item.setIcon(R.drawable.baseline_filter_alt_24);
-                    setAdapter(myDatabase.getAllStatus(0,SharePrefs.getIntPref(this,"userId")));
-                 }
+                    setAdapter(myDatabase.getAllStatus(0, SharePrefs.getIntPref(this, "userId")));
+                }
 
                 break;
             }
-            case R.id.nav_logout:{
+            case R.id.nav_logout: {
                 showDialog("Are You Sure To Logout", true);
                 break;
             }
@@ -88,27 +89,26 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initView(){
+    private void initView() {
         btUpload = findViewById(R.id.btUpload);
 
         etStatus = findViewById(R.id.etStatus);
 
         rvStatus = findViewById(R.id.rvStatus);
     }
-    private void handleClick(){
+
+    private void handleClick() {
         btUpload.setOnClickListener(v -> {
             if (myDatabase.insertStatus(SharePrefs.getIntPref(this, "userId"), etStatus.getText().toString())) {
-            Utils.showToast(this, "Status uploaded");
-            setAdapter(myDatabase.getAllStatus(0,SharePrefs.getIntPref(this,"userId")));
-            etStatus.setText("");
+                Utils.showToast(this, "Status uploaded");
+                setAdapter(myDatabase.getAllStatus(0, SharePrefs.getIntPref(this, "userId")));
+                etStatus.setText("");
 
             } else {
-            Utils.showToast(this, "Something went wrong");
-        }
+                Utils.showToast(this, "Something went wrong");
+            }
         });
     }
-
-
 
 
     private void showDialog(String message, boolean isLogout) {
@@ -129,9 +129,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         }).setNegativeButton("No", null).show();
     }
+
     private void setAdapter(List<StatusModel> statusModelList) {
-        statusAdapter adapter = new statusAdapter(this,myDatabase,statusModelList);
-        rvStatus.addItemDecoration(new DividerItemDecoration(this, RecyclerView.VERTICAL));
+        statusAdapter adapter = new statusAdapter(this, myDatabase, statusModelList);
+        //rvStatus.addItemDecoration(new DividerItemDecoration(this, RecyclerView.VERTICAL));
         rvStatus.setAdapter(adapter);
     }
 }

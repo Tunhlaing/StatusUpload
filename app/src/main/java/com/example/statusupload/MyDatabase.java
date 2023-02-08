@@ -106,7 +106,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         String query = "";
         if (filterStatus == 1) {
-            query = "SELECT u.user_name, s.status_id, s.status From tbl_user u INNER JOIN tbl_status s ON u.user_id = s.user_id WHERE u.user_id="+userId;
+            query = "SELECT u.user_name, s.status_id, s.status From tbl_user u INNER JOIN tbl_status s ON u.user_id = s.user_id WHERE u.user_id=" + userId;
         } else {
             query = "SELECT u.user_name, s.status_id, s.status From tbl_user u INNER JOIN tbl_status s ON u.user_id = s.user_id";
 

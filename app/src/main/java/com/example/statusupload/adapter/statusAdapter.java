@@ -18,11 +18,11 @@ import com.example.statusupload.ui.EditActivity;
 
 import java.util.List;
 
-public class statusAdapter extends RecyclerView.Adapter<statusAdapter.statusViewHolder>{
+public class statusAdapter extends RecyclerView.Adapter<statusAdapter.statusViewHolder> {
 
-        private Context context;
-        private MyDatabase myDatabase;
-        private List<StatusModel> statusModelList;
+    private Context context;
+    private MyDatabase myDatabase;
+    private List<StatusModel> statusModelList;
 
     public statusAdapter(Context context, MyDatabase myDatabase, List<StatusModel> statusModelList) {
         this.context = context;
@@ -34,7 +34,7 @@ public class statusAdapter extends RecyclerView.Adapter<statusAdapter.statusView
     @NonNull
     @Override
     public statusViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_status,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_status, parent, false);
 
         return new statusViewHolder(v);
     }
@@ -52,11 +52,10 @@ public class statusAdapter extends RecyclerView.Adapter<statusAdapter.statusView
         });
         holder.ivEdit.setOnClickListener(v -> {
             Intent i = new Intent(context, EditActivity.class);
-            i.putExtra("statusId",statusModelList.get(position).getStatusID());
-            i.putExtra("status",statusModelList.get(position).getStatus());
+            i.putExtra("statusId", statusModelList.get(position).getStatusID());
+            i.putExtra("status", statusModelList.get(position).getStatus());
             context.startActivity(i);
         });
-
 
     }
 
@@ -65,10 +64,11 @@ public class statusAdapter extends RecyclerView.Adapter<statusAdapter.statusView
         return statusModelList.size();
     }
 
-    public class statusViewHolder extends RecyclerView.ViewHolder{
-        TextView   tvUsername,tvStatus;
+    public class statusViewHolder extends RecyclerView.ViewHolder {
+        TextView tvUsername, tvStatus;
 
         ImageView ivEdit, ivDelete;
+
         public statusViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
