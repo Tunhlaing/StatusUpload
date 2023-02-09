@@ -62,10 +62,6 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
-        btLogin.setOnClickListener(view ->{
-           startActivity(new Intent(this,LoginActivity.class));
-           finish();
-        });
     }
 
     private boolean checkValidations() {
