@@ -41,6 +41,7 @@ public class statusAdapter extends RecyclerView.Adapter<statusAdapter.statusView
 
     @Override
     public void onBindViewHolder(@NonNull statusViewHolder holder, int position) {
+
         holder.tvUsername.setText(statusModelList.get(position).getUserName());
         holder.tvStatus.setText(statusModelList.get(position).getStatus());
 
@@ -64,7 +65,7 @@ public class statusAdapter extends RecyclerView.Adapter<statusAdapter.statusView
         return statusModelList.size();
     }
 
-    public class statusViewHolder extends RecyclerView.ViewHolder {
+    public static class statusViewHolder extends RecyclerView.ViewHolder {
         TextView tvUsername, tvStatus;
 
         ImageView ivEdit, ivDelete;

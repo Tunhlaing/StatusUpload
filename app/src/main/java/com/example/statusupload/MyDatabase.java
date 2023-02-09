@@ -98,7 +98,6 @@ public class MyDatabase extends SQLiteOpenHelper {
         }
 
     }
-
     @SuppressLint("Range")
     public List<StatusModel> getAllStatus(int filterStatus, int userId) {
         List<StatusModel> statusModelList = new ArrayList<>();

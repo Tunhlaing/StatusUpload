@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void handleClick() {
         btRegister.setOnClickListener(view -> {
             if (checkValidations()) {
-                if (!(myDatabase.isUserExist(etUserName.getText().toString()))) {
+               // if (!(myDatabase.isUserExist(etUserName.getText().toString()))) {
                     myDatabase.insertUser(etUserName.getText().toString(), etPassword.getText().toString());
                     Utils.showToast(this, "Register successfully !!!");
                     startActivity(new Intent(this, LoginActivity.class));
@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     Utils.showToast(this, "This username already exist !!!");
                 }
-            }
+    //        }
         });
         btLogin.setOnClickListener(view -> {
             startActivity(new Intent(this, LoginActivity.class));

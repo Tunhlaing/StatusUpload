@@ -4,13 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -112,20 +110,17 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void showDialog(String message, boolean isLogout) {
-        new AlertDialog.Builder(this).setMessage(message).setCancelable(false).setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (isLogout) {
-                    SharePrefs.clearPref(HomeActivity.this);
+        new AlertDialog.Builder(this).setMessage(message).setCancelable(false).setPositiveButton("yes", (dialog, which) -> {
+            if (isLogout) {
+                SharePrefs.clearPref(HomeActivity.this);
 //                    SharedPreferences.Editor editor = pref.edit();
 //                    editor.clear();
 //                    editor.apply();
 
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                    finish();
-                } else {
-                    HomeActivity.super.onBackPressed();
-                }
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                finish();
+            } else {
+                HomeActivity.super.onBackPressed();
             }
         }).setNegativeButton("No", null).show();
     }
